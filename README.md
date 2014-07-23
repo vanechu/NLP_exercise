@@ -21,5 +21,5 @@ The tutorial covers the following material:
   * **Tutorial 10:** Neural Networks
   * **Tutorial 11:** Structured Perceptron
   * **Tutorial 12:** Dependency Parsing
-  * **Tutorial 13:** Search Algorithms 
-  Perfect.
+  * **Tutorial 13:** Search Algorithms
+
