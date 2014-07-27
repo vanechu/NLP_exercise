@@ -1,7 +1,8 @@
 import sys
 from collections import defaultdict
 
-count_dict = defaultdict(lambda: 0)
+counts = defaultdict(lambda: 0)
+context_counts = defaultdict(lambda: 0)
 
 total_count = 0
 
@@ -10,11 +11,17 @@ with open(sys.argv[1], "r") as input_file:
       line = line.split()
       line.insert(0, '<s>')
       line.append('</s>')
-      for word in line:
-         count_dict[word] += 1
-         total_count +=1
+      for word_prev, word in zip(line[:-1], line[1:]):
+         counts[word_prev +' '+ word] += 1
+         context_counts[word_prev] += 1
+         counts[word] += 1
+         context_counts[""] += 1
 
-for k,v in sorted(count_dict.items()):
-   print "%s %r" %(k, float(v) / total_count)
+for k,v in sorted(counts.items()):
+   words = k.split(' ')
+   words.pop()
+   context = "".join(words)
+   probability = v / float(context_counts[context])
+   print "%s  %f" %(k, probability)
 
-# test with "python programming_1_train.py ../test/01-train-input.txt"
+# test with "python programming_2_train.py ../test/02-train-input.txt >> 02-train.model"

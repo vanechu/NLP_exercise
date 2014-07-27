@@ -23,7 +23,6 @@ def learning(weights, data):
    for line in data.readlines():
       label = int(line.split()[0])
       words = line.split()[1:]
-      # print "label",words
       phi = creat_features(words)
       label_pred = predict_one(phi, weights)
       if label != label_pred:
